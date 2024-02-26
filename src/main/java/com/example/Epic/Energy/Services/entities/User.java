@@ -1,4 +1,4 @@
 package com.example.Epic.Energy.Services.entities;
 
-public class Utente {
+public class User {
 }
