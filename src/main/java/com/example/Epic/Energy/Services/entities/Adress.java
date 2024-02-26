@@ -1,5 +1,6 @@
 package com.example.Epic.Energy.Services.entities;
 
+import com.example.Epic.Energy.Services.enums.Municipality;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;

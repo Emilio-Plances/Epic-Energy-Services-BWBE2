@@ -1,6 +1,7 @@
 package com.example.Epic.Energy.Services.services;
 
 import com.example.Epic.Energy.Services.entities.Customer;
+import com.example.Epic.Energy.Services.exceptions.NotFoundException;
 import com.example.Epic.Energy.Services.repositories.CustomerRepository;
 import com.example.Epic.Energy.Services.requests.CustomerRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,6 @@ public class CustomerService {
         x.setBusinessName(customerRequest.getBusinessName());
         x.setVatNumber(customerRequest.getVatNumber());
         x.setInsertionDate(LocalDate.now());
-
-
 
         return customerRepository.save(x);
     }
