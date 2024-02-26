@@ -30,4 +30,10 @@ public class AddressService {
         }
         addressRepository.deleteById(id);
     }
+    public Address updateAddress(Long id, Address addressDetails) throws NotFoundException {
+        Address address = addressRepository.findById(id).orElseThrow(() -> new NotFoundException("Address not found"));
+        address.setStreet(addressDetails.getStreet());
+        address.setStreetNumber(addressDetails.getStreetNumber());
+        return addressRepository.save(address);
+    }
 }
