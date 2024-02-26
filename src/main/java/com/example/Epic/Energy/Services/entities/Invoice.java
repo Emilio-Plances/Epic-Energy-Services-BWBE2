@@ -11,8 +11,6 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "invoices")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 
 public class Invoice {
     @Id

@@ -1,8 +1,10 @@
 package com.example.Epic.Energy.Services.entities;
-
-import com.example.Epic.Energy.Services.enums.Municipality;
 import jakarta.persistence.*;
+import lombok.Data;
 
+@Entity
+@Data
+@Table(name = "addresses")
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
