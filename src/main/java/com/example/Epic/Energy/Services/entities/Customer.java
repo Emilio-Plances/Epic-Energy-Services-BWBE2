@@ -31,6 +31,9 @@ public class Customer {
     @Column(name = "last_contact_date")
     private LocalDate lastContactDate;
 
+    @Column(name = "annual_turnover")
+    private double annualTurnover;
+
     @Column(unique = true)
     private String pec;
 
@@ -49,8 +52,8 @@ public class Customer {
     @Column(name = "contact_surname")
     private String contactSurname;
 
-    @Column(name = "contact_telephone", unique = true)
-    private String contactTelephone;
+    @Column(name = "contact_number", unique = true)
+    private String contactNumber;
 
     private String logo;
 

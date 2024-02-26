@@ -36,8 +36,8 @@ public class CustomerRequest {
     @NotBlank(message = "contact surname request")
     private String contactSurname;
 
-    @NotBlank(message = "contact telephone request")
-    private String contactTelephone;
+    @NotBlank(message = "contact number request")
+    private String contactNumber;
 
     @NotBlank(message = "customer type request")
     private CustomerType customerType;

@@ -4,6 +4,7 @@ import com.example.Epic.Energy.Services.enums.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import org.hibernate.validator.constraints.URL;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,6 +29,7 @@ public class User implements UserDetails {
     private String firstName;
     @Column(name="last_name")
     private String lastName;
+    @URL
     private String avatar;
     private List<Role> roles;
     @Override
