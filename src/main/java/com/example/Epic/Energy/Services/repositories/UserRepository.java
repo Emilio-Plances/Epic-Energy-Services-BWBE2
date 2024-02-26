@@ -1,9 +1,13 @@
 package com.example.Epic.Energy.Services.repositories;
 
+import com.example.Epic.Energy.Services.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public interface CustomerRepository extends JpaRepository<Costumer,Long>, PagingAndSortingRepository<Costumer,Long> {
+public interface UserRepository extends JpaRepository<User,Long>, PagingAndSortingRepository<User,Long> {
+    Optional<User> findByUsername(String username);
 }
