@@ -1,5 +1,6 @@
 package com.example.Epic.Energy.Services.entities;
 
+import com.example.Epic.Energy.Services.enums.InvoiceStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,7 +20,8 @@ public class Invoice {
     private Long id;
     private LocalDate date;
     private String number;
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private InvoiceStatus status;
     @ManyToOne
     private Customer customer;
 
