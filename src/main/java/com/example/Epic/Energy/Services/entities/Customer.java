@@ -55,6 +55,7 @@ public class Customer {
     private String logo;
 
     @Column(name = "customer_type")
+    @Enumerated
     private CustomerType customerType;
 
     @Column(unique = true)
