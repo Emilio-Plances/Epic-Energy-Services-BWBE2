@@ -33,6 +33,7 @@ public class User implements UserDetails {
     private String lastName;
     @URL
     private String avatar;
+    @Enumerated(EnumType.STRING)
     private List<Role> roles;
     @JsonIgnore
     @Override

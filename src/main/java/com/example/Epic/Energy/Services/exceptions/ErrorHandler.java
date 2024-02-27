@@ -26,4 +26,12 @@ public class ErrorHandler {
     public ErrorResponse badRequestExceptionHandler(BadRequestExceptionHandler e){
         return new ErrorResponse(e.getMessage());
     }
+
+ //   @ExceptionHandler(PSQLException.class)
+ //   @ResponseStatus(HttpStatus.BAD_REQUEST)
+ //   public ErrorResponse badRequestExceptionHandler(PSQLException e){
+ //       return new ErrorResponse(e.getMessage());
+ //   }
+
+
 }

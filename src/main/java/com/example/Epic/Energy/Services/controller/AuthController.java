@@ -3,7 +3,7 @@ package com.example.Epic.Energy.Services.controller;
 import com.example.Epic.Energy.Services.entities.User;
 import com.example.Epic.Energy.Services.exceptions.BadRequestExceptionHandler;
 import com.example.Epic.Energy.Services.exceptions.NotFoundException;
-import com.example.Epic.Energy.Services.requests.UserRequest;
+import com.example.Epic.Energy.Services.requests.RegisterRequest;
 import com.example.Epic.Energy.Services.responses.DefaultResponse;
 import com.example.Epic.Energy.Services.responses.LoginResponse;
 import com.example.Epic.Energy.Services.security.JwtTools;
@@ -34,13 +34,13 @@ public class AuthController {
     @Autowired
     private JwtTools jwtTools;
     @PostMapping("/register")
-    public ResponseEntity<DefaultResponse> register(@RequestBody @Validated UserRequest userRequest, BindingResult bindingResult) throws BadRequestExceptionHandler {
+    public ResponseEntity<DefaultResponse> register(@RequestBody @Validated RegisterRequest registerRequest, BindingResult bindingResult) throws BadRequestExceptionHandler {
         if(bindingResult.hasErrors()){
             throw new BadRequestExceptionHandler(bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList().toString());
         }
 
-        sendEmail(userRequest.getEmail());
-        return DefaultResponse.noMessage(userService.saveUser(userRequest), HttpStatus.CREATED);
+        sendEmail(registerRequest.getEmail());
+        return DefaultResponse.noMessage(userService.saveUser(registerRequest), HttpStatus.CREATED);
     }
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody @Validated LoginRequest loginRequest, BindingResult bindingResult) throws BadRequestExceptionHandler, NotFoundException {
