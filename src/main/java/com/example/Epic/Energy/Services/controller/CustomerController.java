@@ -6,7 +6,6 @@ import com.example.Epic.Energy.Services.exceptions.NotFoundException;
 import com.example.Epic.Energy.Services.requests.CustomerRequest;
 import com.example.Epic.Energy.Services.responses.DefaultResponse;
 import com.example.Epic.Energy.Services.services.CustomerService;
-import jakarta.mail.Multipart;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;

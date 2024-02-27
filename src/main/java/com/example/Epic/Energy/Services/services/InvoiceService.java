@@ -41,8 +41,9 @@ public class InvoiceService {
         return invoiceRepository.save(invoice);
     }
 
-    public void deleteInvoice(Invoice invoice) {
-        invoiceRepository.delete(invoice);
+    public void deleteInvoice(String number) throws NotFoundException {
+        Invoice x = getInvoiceByNumber(number);
+        invoiceRepository.delete(x);
     }
 
 }
