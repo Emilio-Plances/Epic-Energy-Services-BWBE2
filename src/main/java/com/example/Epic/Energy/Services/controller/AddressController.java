@@ -5,13 +5,14 @@ import com.example.Epic.Energy.Services.requests.AddressRequest;
 import com.example.Epic.Energy.Services.responses.DefaultResponse;
 import com.example.Epic.Energy.Services.services.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.print.Pageable;
 import java.util.List;
 
 @RestController
@@ -26,8 +27,8 @@ public class AddressController {
     }
 
     @GetMapping
-    public ResponseEntity<DefaultResponse> getAllAddresses() {
-        List<Address> addresses = addressService.getAllAddresses();
+    public ResponseEntity<DefaultResponse> getAllAddresses(Pageable pageable) {
+        Page<Address> addresses = addressService.getAll(pageable);
         return DefaultResponse.full("Lista di indirizzi recuperata con successo", addresses, HttpStatus.OK);
     }
 

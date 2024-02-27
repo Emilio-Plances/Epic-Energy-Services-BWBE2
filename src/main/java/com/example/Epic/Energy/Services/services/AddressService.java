@@ -4,9 +4,9 @@ import com.example.Epic.Energy.Services.entities.Address;
 import com.example.Epic.Energy.Services.repositories.AddressRepository;
 import com.example.Epic.Energy.Services.requests.AddressRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable; // Import corretto
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class AddressService {
@@ -18,8 +18,8 @@ public class AddressService {
         this.addressRepository = addressRepository;
     }
 
-    public List<Address> getAllAddresses() {
-        return addressRepository.findAll();
+    public Page<Address> getAll(Pageable pageable) {
+        return addressRepository.findAll(pageable);
     }
 
     public Address getAddressById(Long id) {
@@ -57,4 +57,3 @@ public class AddressService {
         addressRepository.deleteById(id);
     }
 }
-
