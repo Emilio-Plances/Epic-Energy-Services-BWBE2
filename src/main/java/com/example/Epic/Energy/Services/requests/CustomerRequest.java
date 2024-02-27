@@ -1,13 +1,9 @@
 package com.example.Epic.Energy.Services.requests;
 
 import com.example.Epic.Energy.Services.enums.CustomerType;
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Data
 public class CustomerRequest {
