@@ -21,9 +21,17 @@ public class ErrorHandler {
         return new ErrorResponse(e.getMessage());
     }
 
-    @ExceptionHandler(BadRequestException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse badRequestException(BadRequestException e){
+    @ExceptionHandler(BadRequestExceptionHandler.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse badRequestExceptionHandler(BadRequestExceptionHandler e){
         return new ErrorResponse(e.getMessage());
     }
+
+ //   @ExceptionHandler(PSQLException.class)
+ //   @ResponseStatus(HttpStatus.BAD_REQUEST)
+ //   public ErrorResponse badRequestExceptionHandler(PSQLException e){
+ //       return new ErrorResponse(e.getMessage());
+ //   }
+
+
 }

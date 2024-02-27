@@ -19,7 +19,7 @@ public class JwtTools {
     private String expiration;
 
     public String createToken(User user){
-        return Jwts.builder().subject(user.getUsername())
+        return "Bearer "+Jwts.builder().subject(user.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis()+Long.parseLong(expiration)))
                 .signWith(Keys.hmacShaKeyFor(secret.getBytes())).compact();

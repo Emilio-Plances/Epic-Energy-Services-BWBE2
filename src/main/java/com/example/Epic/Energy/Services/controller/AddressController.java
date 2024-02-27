@@ -1,72 +1,51 @@
 package com.example.Epic.Energy.Services.controller;
 
-import com.example.Epic.Energy.Services.entities.Address;
+import com.example.Epic.Energy.Services.exceptions.BadRequestExceptionHandler;
+import com.example.Epic.Energy.Services.exceptions.NotFoundException;
 import com.example.Epic.Energy.Services.requests.AddressRequest;
 import com.example.Epic.Energy.Services.responses.DefaultResponse;
 import com.example.Epic.Energy.Services.services.AddressService;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/address")
+@RequestMapping("/api/addresses")
 public class AddressController {
-
-    private final AddressService addressService;
-
     @Autowired
-    public AddressController(AddressService addressService) {
-        this.addressService = addressService;
-    }
-
+    private AddressService addressService;
     @GetMapping
     public ResponseEntity<DefaultResponse> getAllAddresses(Pageable pageable) {
-        Page<Address> addresses = addressService.getAll(pageable);
-        return DefaultResponse.full("Lista di indirizzi recuperata con successo", addresses, HttpStatus.OK);
+        return DefaultResponse.noMessage(addressService.getAllAddresses(pageable),HttpStatus.OK);
     }
-
     @GetMapping("/{id}")
-    public ResponseEntity<DefaultResponse> getAddressById(@PathVariable Long id) {
-        Address address = addressService.getAddressById(id);
-        if (address != null) {
-            return DefaultResponse.full("Indirizzo recuperato con successo", address, HttpStatus.OK);
-        } else {
-            return DefaultResponse.noObject("Indirizzo non trovato", HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<DefaultResponse> getAddressById(@PathVariable Long id) throws NotFoundException {
+        return DefaultResponse.noMessage(addressService.getAddressById(id),HttpStatus.OK);
     }
-
     @PostMapping
-    public ResponseEntity<DefaultResponse> createAddress(@RequestBody @Validated AddressRequest addressRequest, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return DefaultResponse.noObject(bindingResult.getAllErrors().toString(), HttpStatus.BAD_REQUEST);
-        }
-        Address createdAddress = addressService.createAddress(addressRequest);
-        return DefaultResponse.full("Indirizzo creato con successo", createdAddress, HttpStatus.CREATED);
+    public ResponseEntity<DefaultResponse> createAddress(@RequestBody @Validated AddressRequest addressRequest, BindingResult bindingResult) throws NotFoundException, BadRequestExceptionHandler {
+        if(bindingResult.hasErrors())
+            throw new BadRequestExceptionHandler(bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList().toString());
+        return DefaultResponse.noMessage(addressService.createAddress(addressRequest), HttpStatus.CREATED);
     }
-
     @PutMapping("/{id}")
-    public ResponseEntity<DefaultResponse> updateAddress(@PathVariable Long id, @RequestBody @Validated AddressRequest addressRequest, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return DefaultResponse.noObject(bindingResult.getAllErrors().toString(), HttpStatus.BAD_REQUEST);
-        }
-        Address updatedAddress = addressService.updateAddress(id, addressRequest);
-        if (updatedAddress != null) {
-            return DefaultResponse.full("Indirizzo aggiornato con successo", updatedAddress, HttpStatus.OK);
-        } else {
-            return DefaultResponse.noObject("Indirizzo non trovato", HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<DefaultResponse> updateAddress(@PathVariable Long id, @RequestBody @Validated AddressRequest addressRequest,BindingResult bindingResult) throws NotFoundException, BadRequestExceptionHandler {
+        if(bindingResult.hasErrors())
+            throw new BadRequestExceptionHandler(bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList().toString());
+        return DefaultResponse.noMessage(addressService.updateAddress(id, addressRequest), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<DefaultResponse> deleteAddress(@PathVariable Long id) {
+    public ResponseEntity<DefaultResponse> deleteAddress(@PathVariable Long id) throws NotFoundException {
         addressService.deleteAddress(id);
-        return DefaultResponse.noMessage(null, HttpStatus.NO_CONTENT);
+        String message = "User with ID" + id + " has been deleted";
+        return DefaultResponse.noObject(message, HttpStatus.OK);
     }
 }
