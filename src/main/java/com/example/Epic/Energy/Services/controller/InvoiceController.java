@@ -1,6 +1,5 @@
 package com.example.Epic.Energy.Services.controller;
 
-import com.example.Epic.Energy.Services.entities.Invoice;
 import com.example.Epic.Energy.Services.exceptions.NotFoundException;
 import com.example.Epic.Energy.Services.requests.InvoiceRequest;
 import com.example.Epic.Energy.Services.responses.DefaultResponse;
@@ -14,8 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/invoices")

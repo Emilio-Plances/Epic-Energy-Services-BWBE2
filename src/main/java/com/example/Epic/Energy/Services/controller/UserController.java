@@ -1,7 +1,6 @@
 package com.example.Epic.Energy.Services.controller;
 
 import com.cloudinary.Cloudinary;
-import com.example.Epic.Energy.Services.entities.Customer;
 import com.example.Epic.Energy.Services.entities.User;
 import com.example.Epic.Energy.Services.exceptions.NotFoundException;
 import com.example.Epic.Energy.Services.requests.UserRequest;
@@ -20,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
@@ -60,6 +58,4 @@ public class UserController {
         User x = userService.uploadAvatar(id, (String)cloudinary.uploader().upload(file.getBytes(), new HashMap()).get("url"));
         return DefaultResponse.full("Avatar was uploaded successfully", x , HttpStatus.OK);
     }
-
-
 }
