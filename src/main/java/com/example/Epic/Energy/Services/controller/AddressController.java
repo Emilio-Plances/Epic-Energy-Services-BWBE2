@@ -1,10 +1,11 @@
 package com.example.Epic.Energy.Services.controller;
 
+import com.example.Epic.Energy.Services.exceptions.BadRequestExceptionHandler;
 import com.example.Epic.Energy.Services.exceptions.NotFoundException;
 import com.example.Epic.Energy.Services.requests.AddressRequest;
 import com.example.Epic.Energy.Services.responses.DefaultResponse;
 import com.example.Epic.Energy.Services.services.AddressService;
-import org.apache.coyote.BadRequestException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.data.domain.Pageable;
@@ -28,15 +29,15 @@ public class AddressController {
         return DefaultResponse.noMessage(addressService.getAddressById(id),HttpStatus.OK);
     }
     @PostMapping
-    public ResponseEntity<DefaultResponse> createAddress(@RequestBody @Validated AddressRequest addressRequest, BindingResult bindingResult) throws NotFoundException, BadRequestException {
+    public ResponseEntity<DefaultResponse> createAddress(@RequestBody @Validated AddressRequest addressRequest, BindingResult bindingResult) throws NotFoundException, BadRequestExceptionHandler {
         if(bindingResult.hasErrors())
-            throw new BadRequestException(bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toString());
+            throw new BadRequestExceptionHandler(bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList().toString());
         return DefaultResponse.noMessage(addressService.createAddress(addressRequest), HttpStatus.CREATED);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<DefaultResponse> updateAddress(@PathVariable Long id, @RequestBody @Validated AddressRequest addressRequest,BindingResult bindingResult) throws NotFoundException, BadRequestException {
+    public ResponseEntity<DefaultResponse> updateAddress(@PathVariable Long id, @RequestBody @Validated AddressRequest addressRequest,BindingResult bindingResult) throws NotFoundException, BadRequestExceptionHandler {
         if(bindingResult.hasErrors())
-            throw new BadRequestException(bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toString());
+            throw new BadRequestExceptionHandler(bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList().toString());
         return DefaultResponse.noMessage(addressService.updateAddress(id, addressRequest), HttpStatus.OK);
     }
 

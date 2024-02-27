@@ -1,17 +1,14 @@
 package com.example.Epic.Energy.Services.services;
 
-import com.example.Epic.Energy.Services.entities.Customer;
 import com.example.Epic.Energy.Services.entities.User;
 import com.example.Epic.Energy.Services.enums.Role;
 import com.example.Epic.Energy.Services.exceptions.NotFoundException;
-import com.example.Epic.Energy.Services.repositories.CustomerRepository;
 import com.example.Epic.Energy.Services.repositories.UserRepository;
 import com.example.Epic.Energy.Services.requests.UserRequest;
-import jakarta.persistence.Column;
-import org.hibernate.validator.constraints.URL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +18,8 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder encoder;
 
     public User findByUsername(String username) throws NotFoundException {
         Optional<User> optionalUser=userRepository.findByUsername(username);
@@ -39,11 +38,10 @@ public class UserService {
         User x = new User();
         x.setUsername(userRequest.getUsername());
         x.setEmail(userRequest.getEmail());
-        x.setPassword(userRequest.getPassword());
+        x.setPassword(encoder.encode(userRequest.getPassword()));
         x.setFirstName(userRequest.getFirstName());
         x.setLastName(userRequest.getLastName());
         x.setRoles(List.of(Role.USER));
-
         return userRepository.save(x);
     }
 

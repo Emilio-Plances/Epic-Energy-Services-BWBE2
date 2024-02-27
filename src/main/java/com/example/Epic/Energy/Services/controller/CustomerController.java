@@ -2,11 +2,11 @@ package com.example.Epic.Energy.Services.controller;
 
 import com.cloudinary.Cloudinary;
 import com.example.Epic.Energy.Services.entities.Customer;
+import com.example.Epic.Energy.Services.exceptions.BadRequestExceptionHandler;
 import com.example.Epic.Energy.Services.exceptions.NotFoundException;
 import com.example.Epic.Energy.Services.requests.CustomerRequest;
 import com.example.Epic.Energy.Services.responses.DefaultResponse;
 import com.example.Epic.Energy.Services.services.CustomerService;
-import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
@@ -42,14 +42,14 @@ public class CustomerController {
     }
 
     @PostMapping("")
-    public ResponseEntity<DefaultResponse> saveCustomer(@RequestBody @Validated CustomerRequest customerRequest, BindingResult bindingResult) throws BadRequestException {
-        if (bindingResult.hasErrors()) throw new BadRequestException(bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList().toString());
+    public ResponseEntity<DefaultResponse> saveCustomer(@RequestBody @Validated CustomerRequest customerRequest, BindingResult bindingResult) throws BadRequestExceptionHandler {
+        if (bindingResult.hasErrors()) throw new BadRequestExceptionHandler(bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList().toString());
         return DefaultResponse.noMessage(customerService.saveCustomer(customerRequest), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DefaultResponse> updateCustomer(@PathVariable long id, @RequestBody @Validated CustomerRequest customerRequest, BindingResult bindingResult) throws BadRequestException, NotFoundException {
-        if (bindingResult.hasErrors()) throw new BadRequestException(bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toString());
+    public ResponseEntity<DefaultResponse> updateCustomer(@PathVariable long id, @RequestBody @Validated CustomerRequest customerRequest, BindingResult bindingResult) throws BadRequestExceptionHandler, NotFoundException {
+        if (bindingResult.hasErrors()) throw new BadRequestExceptionHandler(bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList().toString());
         return DefaultResponse.noMessage(customerService.updateCustomer(id, customerRequest), HttpStatus.OK);
     }
 

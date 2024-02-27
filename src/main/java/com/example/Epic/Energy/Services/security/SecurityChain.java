@@ -23,6 +23,8 @@ public class SecurityChain {
 
         httpSecurity.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
+        httpSecurity.authorizeHttpRequests(request -> request.requestMatchers("/api/auth/**").permitAll());
+        httpSecurity.authorizeHttpRequests(request -> request.requestMatchers("/**").denyAll());
         return httpSecurity.build();
     }
 }

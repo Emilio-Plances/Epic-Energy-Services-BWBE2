@@ -1,8 +1,6 @@
 package com.example.Epic.Energy.Services.requests;
 
-import com.example.Epic.Energy.Services.entities.Customer;
 import com.example.Epic.Energy.Services.enums.InvoiceStatus;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
