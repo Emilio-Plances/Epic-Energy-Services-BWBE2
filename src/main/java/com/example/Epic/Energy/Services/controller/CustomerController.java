@@ -64,7 +64,7 @@ public class CustomerController {
     @PatchMapping("/{id}/upload")
     public ResponseEntity<DefaultResponse> uploadLogo(@PathVariable long id, @RequestParam("upload")MultipartFile file) throws IOException, NotFoundException {
         Customer x = customerService.udloadLogo(id, (String)cloudinary.uploader().upload(file.getBytes(), new HashMap()).get("url"));
-        return DefaultResponse.noObject("Logo was uploaded successfully", HttpStatus.OK);
+        return DefaultResponse.full("Logo was uploaded successfully", x , HttpStatus.OK);
     }
 
 

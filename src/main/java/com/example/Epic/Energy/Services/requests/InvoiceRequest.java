@@ -13,9 +13,6 @@ public class InvoiceRequest {
     @NotBlank(message = "date request")
     private LocalDate date;
 
-    @NotBlank(message = "number request")
-    private String number;
-
     @NotBlank(message = "status request")
     private InvoiceStatus status;
 

@@ -15,9 +15,8 @@ import java.time.LocalDate;
 public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private LocalDate date;
     private String number;
+    private LocalDate date;
     @Enumerated(EnumType.STRING)
     private InvoiceStatus status;
     @ManyToOne
