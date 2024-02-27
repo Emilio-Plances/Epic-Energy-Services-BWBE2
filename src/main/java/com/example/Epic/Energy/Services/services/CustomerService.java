@@ -18,11 +18,12 @@ public class CustomerService {
     private CustomerRepository customerRepository;
 
     public Page<Customer> getAllCustomer(Pageable pageable){
+
         return customerRepository.findAll(pageable);
     }
 
     public Customer getCustomerById(long id) throws NotFoundException {
-        return customerRepository.findById(id).orElseThrow(()->new NotFoundException("Customer by id= " + id + " not found"));
+        return customerRepository.findById(id).orElseThrow(()->new NotFoundException("Customer with id= " + id + " was not found"));
     }
 
 
