@@ -17,17 +17,17 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    public Page<Customer> getAllCustomer(Pageable pageable){
+    public Page<Customer> getAllCustomer(Pageable pageable) {
 
         return customerRepository.findAll(pageable);
     }
 
     public Customer getCustomerById(long id) throws NotFoundException {
-        return customerRepository.findById(id).orElseThrow(()->new NotFoundException("Customer with id= " + id + " was not found"));
+        return customerRepository.findById(id).orElseThrow(() -> new NotFoundException("Customer with id= " + id + " was not found"));
     }
 
 
-    public Customer saveCustomer(CustomerRequest customerRequest){
+    public Customer saveCustomer(CustomerRequest customerRequest) {
         Customer x = new Customer();
         x.setBusinessName(customerRequest.getBusinessName());
         x.setVatNumber(customerRequest.getVatNumber());
@@ -45,7 +45,7 @@ public class CustomerService {
         return customerRepository.save(x);
     }
 
-    public Customer updateCustomer(long id, CustomerRequest customerRequest) throws NotFoundException{
+    public Customer updateCustomer(long id, CustomerRequest customerRequest) throws NotFoundException {
         Customer x = getCustomerById(id);
         x.setBusinessName(customerRequest.getBusinessName());
         x.setVatNumber(customerRequest.getVatNumber());
@@ -63,14 +63,55 @@ public class CustomerService {
         return customerRepository.save(x);
     }
 
-    public void deleteCustomer(long id) throws NotFoundException{
+    public void deleteCustomer(long id) throws NotFoundException {
         Customer x = getCustomerById(id);
         customerRepository.delete(x);
     }
 
-    public Customer udloadLogo(long id, String url) throws NotFoundException{
+    public Customer udloadLogo(long id, String url) throws NotFoundException {
         Customer x = getCustomerById(id);
         x.setLogo(url);
         return customerRepository.save(x);
+    }
+
+
+    public Page<Customer> getAllCustomers(Pageable pageable) {
+        return customerRepository.findAll(pageable);
+    }
+
+    public Page<Customer> customersOrderByRagioneSociale(Pageable pageable) {
+        return customerRepository.findBusinessNameASC(pageable);
+    }
+
+    public Page<Customer> customersOrderByFattAnnuale(Pageable pageable) {
+        return customerRepository.findAllOrderByFatturatoAnnualeDesc(pageable);
+    }
+
+    public Page<Customer> customersOrderByDataInserimento(Pageable pageable) {
+        return customerRepository.findAllOrderByDataInserimentoDesc(pageable);
+    }
+
+    public Page<Customer> customersOrderByDataUltimoContatto(Pageable pageable) {
+        return customerRepository.findAllOrderByDataUltimoContattoDesc(pageable);
+    }
+
+    public Page<Customer> customersOrderByProvincia(Pageable pageable) {
+        return customerRepository.findAllOrderByProvinciaSedeLegaleAsc(pageable);
+    }
+
+    public Page<Customer> customersByIntervalloFatturatoAnnuale(double minRevenue, double maxRevenue, Pageable pageable) {
+        return customerRepository.findByFatturatoAnnualeBetween(minRevenue, maxRevenue, pageable);
+    }
+
+    public Page<Customer> customersByIntervalloDataInserimento(LocalDate fromDate, LocalDate toDate, Pageable pageable) {
+        return customerRepository.findByDataInserimentoBetween(fromDate, toDate, pageable);
+    }
+
+    public Page<Customer> customersByIntervalloDataUltimoContatto(LocalDate fromDate, LocalDate toDate, Pageable pageable) {
+        return customerRepository.findByDataUltimoContattoBetween(fromDate, toDate, pageable);
+    }
+
+    public Page<Customer> customersByRagioneSociale(String name, Pageable pageable) {
+        return customerRepository.findByRagioneSocialeContaining(name, pageable);
     }
 }

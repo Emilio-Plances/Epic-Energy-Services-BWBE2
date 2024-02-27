@@ -1,5 +1,6 @@
 package com.example.Epic.Energy.Services.services;
 
+import com.example.Epic.Energy.Services.entities.Customer;
 import com.example.Epic.Energy.Services.entities.Invoice;
 import com.example.Epic.Energy.Services.exceptions.NotFoundException;
 import com.example.Epic.Energy.Services.repositories.InvoiceRepository;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -48,4 +50,29 @@ public class InvoiceService {
         invoiceRepository.delete(x);
     }
 
+
+    public Page<Invoice> getByCustomer(Customer customer, Pageable pageable) {
+        return invoiceRepository.findByCustomer(customer, pageable);
+    }
+
+    public Page<Invoice> getByStatus(String status, Pageable pageable) {
+        return invoiceRepository.findByStatus(status, pageable);
+    }
+
+    public Page<Invoice> getByDate(LocalDate date, Pageable pageable) {
+        return invoiceRepository.findByDate(date, pageable);
+    }
+
+    // Metodo per recuperare le fatture emesse per un anno specifico
+    public Page<Invoice> findByAnno(int year, Pageable pageable) {
+        return invoiceRepository.findByAnno(year, pageable);
+    }
+
+    public Page<Invoice> getByDateBetween(LocalDate startDate, LocalDate endDate, Pageable pageable) {
+        return invoiceRepository.findByDateBetween(startDate, endDate, pageable);
+    }
+
+    public Page<Invoice> getByImportoBetween(double minAmount, double maxAmount, Pageable pageable) {
+        return invoiceRepository.findByImportoBetween(minAmount, maxAmount, pageable);
+    }
 }
