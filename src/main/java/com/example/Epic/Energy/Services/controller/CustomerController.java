@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/customer")
+@RequestMapping("/api/customers")
 public class CustomerController {
 
     @Autowired
