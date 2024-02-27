@@ -63,7 +63,7 @@ public class UserService {
         userRepository.delete(x);
     }
 
-    public User udloadAvatar(long id, String url) throws NotFoundException{
+    public User uploadAvatar(long id, String url) throws NotFoundException{
         User x = getUserById(id);
         x.setAvatar(url);
         return userRepository.save(x);
