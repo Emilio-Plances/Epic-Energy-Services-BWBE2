@@ -16,11 +16,9 @@ public class Address {
     @Column(name = "postal_code")
     private String postalCode;
     private String country;
-    private Municipality municipality;
     @OneToOne
+    @JoinColumn(name = "municipality_fk")
+    private Municipality municipality;
+    @OneToOne(mappedBy = "address")
     private Customer customer;
-
-
-
-
 }

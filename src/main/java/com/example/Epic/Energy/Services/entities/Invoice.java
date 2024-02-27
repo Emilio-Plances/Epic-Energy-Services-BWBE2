@@ -21,7 +21,7 @@ public class Invoice {
     @Enumerated(EnumType.STRING)
     private InvoiceStatus status;
     @ManyToOne
+    @JoinColumn(name = "customer_fk")
     private Customer customer;
-
-    }
+}
 
