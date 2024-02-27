@@ -15,6 +15,8 @@ import java.util.List;
 public class InvoiceService {
     @Autowired
     private InvoiceRepository invoiceRepository;
+    @Autowired
+    private CustomerService customerService;
 
     public Page<Invoice> getAllInvoices(Pageable pageable) {
         return invoiceRepository.findAll(pageable);
@@ -23,9 +25,9 @@ public class InvoiceService {
     public Invoice getInvoiceByNumber(String number) throws NotFoundException {
         return invoiceRepository.findByNumber(number).orElseThrow(()->new NotFoundException("Invoice with number= " + number + " was not found"));
     }
-    public Invoice saveInvoice(InvoiceRequest invoiceRequest) {
+    public Invoice saveInvoice(InvoiceRequest invoiceRequest) throws NotFoundException {
         Invoice invoice = new Invoice();
-        invoice.setCustomer(invoiceRequest.getCustomer());
+        invoice.setCustomer(customerService.getCustomerById(invoiceRequest.getCustomerId()));
         invoice.setDate(invoiceRequest.getDate());
         invoice.setStatus(invoiceRequest.getStatus());
 
@@ -34,7 +36,7 @@ public class InvoiceService {
 
     public Invoice updateInvoice(String number, InvoiceRequest invoiceRequest) throws NotFoundException {
         Invoice invoice = getInvoiceByNumber(number);
-        invoice.setCustomer(invoiceRequest.getCustomer());
+        invoice.setCustomer(customerService.getCustomerById(invoiceRequest.getCustomerId()));
         invoice.setDate(invoiceRequest.getDate());
         invoice.setStatus(invoiceRequest.getStatus());
 

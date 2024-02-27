@@ -31,7 +31,7 @@ public class InvoiceController {
         return DefaultResponse.noMessage(invoiceService.getInvoiceByNumber(number),HttpStatus.OK);
     }
     @PostMapping
-    public ResponseEntity<DefaultResponse> createInvoice(@RequestBody @Validated InvoiceRequest invoiceRequest, BindingResult bindingResult) throws BadRequestException {
+    public ResponseEntity<DefaultResponse> createInvoice(@RequestBody @Validated InvoiceRequest invoiceRequest, BindingResult bindingResult) throws BadRequestException, NotFoundException {
         if (bindingResult.hasErrors()) throw new BadRequestException(bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList().toString());
         return DefaultResponse.noMessage(invoiceService.saveInvoice(invoiceRequest), HttpStatus.OK);
     }

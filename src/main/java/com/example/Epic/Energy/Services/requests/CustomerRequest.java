@@ -3,42 +3,43 @@ package com.example.Epic.Energy.Services.requests;
 import com.example.Epic.Energy.Services.enums.CustomerType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 public class CustomerRequest {
-    @NotBlank(message = "business name request")
+    @NotBlank(message = "Business name request")
     private String businessName;
 
-    @NotBlank(message = "vat number request")
+    @NotBlank(message = "Vat number request")
     private String vatNumber;
 
-    @NotBlank(message = "pec request")
+    @NotBlank(message = "Pec request")
     @Email
     private String pec;
 
-    @NotBlank(message = "phone number request")
+    @NotBlank(message = "Phone number request")
     private String phoneNumber;
 
-    @NotBlank(message = "registered office address request")
+    @NotBlank(message = "Registered office address request")
     private String registeredOfficeAddress;
 
-    @NotBlank(message = "operational headquarters address request")
+    @NotBlank(message = "Operational headquarters address request")
     private String operationalHeadquartersAddress;
 
-    @NotBlank(message = "contact name request")
+    @NotBlank(message = "Contact name request")
     private String contactName;
 
-    @NotBlank(message = "contact surname request")
+    @NotBlank(message = "Contact surname request")
     private String contactSurname;
 
-    @NotBlank(message = "contact number request")
+    @NotBlank(message = "Contact number request")
     private String contactNumber;
 
-    @NotBlank(message = "customer type request")
+    @NotNull(message = "Customer type request")
     private CustomerType customerType;
 
-    @NotBlank(message = "email request")
+    @NotBlank(message = "Email request")
     @Email
     private String email;
 }

@@ -1,6 +1,7 @@
 package com.example.Epic.Energy.Services.requests;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -23,6 +24,6 @@ public class AddressRequest {
     @NotBlank(message = "municipality request")
     private String municipality;
 
-    @NotBlank(message = "costumerId request")
+    @NotNull(message = "costumerId request")
     private Long customerId;
 }
