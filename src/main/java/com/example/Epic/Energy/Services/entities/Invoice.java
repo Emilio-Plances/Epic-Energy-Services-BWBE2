@@ -11,8 +11,8 @@ import java.time.LocalDate;
 @Data
 public class Invoice {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String number;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long number;
     private LocalDate date;
     @Enumerated(EnumType.STRING)
     private InvoiceStatus status;

@@ -22,7 +22,7 @@ public class InvoiceService {
         return invoiceRepository.findAll(pageable);
     }
 
-    public Invoice getInvoiceByNumber(String number) throws NotFoundException {
+    public Invoice getInvoiceByNumber(long number) throws NotFoundException {
         return invoiceRepository.findByNumber(number).orElseThrow(()->new NotFoundException("Invoice with number= " + number + " was not found"));
     }
     public Invoice saveInvoice(InvoiceRequest invoiceRequest) throws NotFoundException {
@@ -34,7 +34,7 @@ public class InvoiceService {
         return invoiceRepository.save(invoice);
     }
 
-    public Invoice updateInvoice(String number, InvoiceRequest invoiceRequest) throws NotFoundException {
+    public Invoice updateInvoice(long number, InvoiceRequest invoiceRequest) throws NotFoundException {
         Invoice invoice = getInvoiceByNumber(number);
         invoice.setCustomer(customerService.getCustomerById(invoiceRequest.getCustomerId()));
         invoice.setDate(invoiceRequest.getDate());
@@ -43,7 +43,7 @@ public class InvoiceService {
         return invoiceRepository.save(invoice);
     }
 
-    public void deleteInvoice(String number) throws NotFoundException {
+    public void deleteInvoice(long number) throws NotFoundException {
         Invoice x = getInvoiceByNumber(number);
         invoiceRepository.delete(x);
     }
