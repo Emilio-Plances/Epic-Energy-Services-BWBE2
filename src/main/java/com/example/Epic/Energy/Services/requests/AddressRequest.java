@@ -5,7 +5,6 @@ import lombok.Data;
 
 @Data
 public class AddressRequest {
-
     @NotBlank(message = "street request")
     private String street;
 
@@ -21,4 +20,9 @@ public class AddressRequest {
     @NotBlank(message = "country request")
     private String country;
 
+    @NotBlank(message = "municipality request")
+    private String municipality;
+
+    @NotBlank(message = "costumerId request")
+    private Long customerId;
 }

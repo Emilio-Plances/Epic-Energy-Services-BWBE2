@@ -2,6 +2,7 @@ package com.example.Epic.Energy.Services;
 
 import com.example.Epic.Energy.Services.entities.Municipality;
 import com.example.Epic.Energy.Services.repositories.MunicipalityRepository;
+import com.example.Epic.Energy.Services.services.MunicipalityService;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import org.slf4j.Logger;
@@ -18,10 +19,10 @@ import java.util.Optional;
 public class Runner implements CommandLineRunner {
     private final Logger logger= LoggerFactory.getLogger("ReggioNellaFottutaEmilia");
     @Autowired
-    private MunicipalityRepository municipalityRepository;
+    private MunicipalityService municipalityService;
     @Override
     public void run(String... args) throws Exception {
-        Optional<Municipality> optionalMunicipality=municipalityRepository.findById((long)1);
+        Optional<Municipality> optionalMunicipality=municipalityService.findById((long)1);
         if(optionalMunicipality.isEmpty()) {
             String municipalities = "csvFiles/comuni-italiani.csv";
             String provinces = "csvFiles/province-italiane.csv";
@@ -40,7 +41,7 @@ public class Runner implements CommandLineRunner {
                             newMunicipality.setProvince(provinceSplit[1]);
                             newMunicipality.setProvinceAbbr(provinceSplit[0]);
                             newMunicipality.setRegion(provinceSplit[2]);
-                            municipalityRepository.save(newMunicipality);
+                            municipalityService.save(newMunicipality);
                             break;
                         }
                     }
