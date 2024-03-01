@@ -15,3 +15,4 @@ http://localhost:8080/api/customers/byLastContactDateRange?fromDate=2024-02-27&t
 http://localhost:8080/api/customers/byNameContaining?name=stu
 
 http://localhost:8080/api/users/2/promoteToAdmin
+http://localhost:8080/api/auth/sendEmail
