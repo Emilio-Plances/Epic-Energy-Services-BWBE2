@@ -5,8 +5,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import java.time.LocalDate;
+import java.util.Optional;
 
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
+
+
+    Optional<Customer> findByEmail(String email);
 
     //Nome
     // Recupera tutti i clienti ordinati per ragione sociale in ordine ascendente

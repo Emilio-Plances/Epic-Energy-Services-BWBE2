@@ -36,10 +36,18 @@ public class CustomerService {
         return customerRepository.findById(id).orElseThrow(() -> new NotFoundException("Customer with id= " + id + " was not found"));
     }
 
+    public Customer getCustomerByEmail(String email) throws NotFoundException {
+        return customerRepository.findByEmail(email)
+                .orElseThrow(() -> new NotFoundException("Customer with email " + email + " was not found"));
+    }
+
     public Customer saveCustomer(CustomerRequest customerRequest) throws NotFoundException {
         Customer x = new Customer();
         updateCustomerDetails(x, customerRequest);
         return customerRepository.save(x);
+    }
+    public Customer saveCustomer2(Customer customer) {
+        return customerRepository.save(customer);
     }
 
     public Customer updateCustomer(long id, CustomerRequest customerRequest) throws NotFoundException {

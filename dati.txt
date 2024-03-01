@@ -51,7 +51,7 @@ CUSTOMER
   "contactSurname": "Bianchi",
   "contactNumber": "+39 333 7654321",
   "customerType": "SRL",
-  "email": "luigi@pizzeriadamario.it"
+  "email": "emilio.plances@gmail.com"
 }
 {
   "businessName": "Supermarket S.p.A.",
@@ -78,7 +78,7 @@ CUSTOMER
   "contactSurname": "Verdi",
   "contactNumber": "+39 333 9876543",
   "customerType": "SRL",
-  "email": "giovanna@supermarket.it"
+  "email": "mauro.cassoni.94@gmail.com"
 }
 {
   "businessName": "Studio Legale Bianchi & Rossi",

@@ -1,5 +1,6 @@
 package com.example.Epic.Energy.Services.controller;
 
+import com.example.Epic.Energy.Services.entities.Customer;
 import com.example.Epic.Energy.Services.entities.User;
 import com.example.Epic.Energy.Services.exceptions.BadRequestExceptionHandler;
 import com.example.Epic.Energy.Services.exceptions.NotFoundException;
@@ -9,6 +10,7 @@ import com.example.Epic.Energy.Services.responses.DefaultResponse;
 import com.example.Epic.Energy.Services.responses.LoginResponse;
 import com.example.Epic.Energy.Services.security.JwtTools;
 import com.example.Epic.Energy.Services.requests.LoginRequest;
+import com.example.Epic.Energy.Services.services.CustomerService;
 import com.example.Epic.Energy.Services.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -22,6 +24,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -29,6 +33,9 @@ public class AuthController {
     private JavaMailSenderImpl mailSender;
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CustomerService customerService;
     @Autowired
     private PasswordEncoder encoder;
     @Autowired
@@ -56,6 +63,13 @@ public class AuthController {
     public ResponseEntity<DefaultResponse> sendEmailToContact(@RequestBody SendMessageRequest request,
                                                               @RequestHeader(HttpHeaders.AUTHORIZATION) String auth) {
         String adminUsername = extractAdminUsernameFromToken(auth);
+        try {
+            Customer customer = customerService.getCustomerByEmail(request.getDestinatario());
+            customer.setLastContactDate(LocalDate.now());
+            customerService.saveCustomer2(customer);
+        } catch (NotFoundException e) {
+            return DefaultResponse.noObject("Customer not found", HttpStatus.NOT_FOUND);
+        }
         sendEmailFromAdmin(request.getDestinatario(), request.getOggetto(), request.getMessaggio(), adminUsername);
         return DefaultResponse.noMessage("Email sent successfully", HttpStatus.OK);
     }
