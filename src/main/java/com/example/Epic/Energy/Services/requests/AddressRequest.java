@@ -12,18 +12,15 @@ public class AddressRequest {
     @NotBlank(message = "street number request")
     private String streetNumber;
 
+    @NotBlank(message = "province request")
+    private String province;
+
     @NotBlank(message = "city request")
     private String city;
 
-    @NotBlank(message = "postal code request")
     private String postalCode;
 
     @NotBlank(message = "country request")
     private String country;
 
-    @NotBlank(message = "municipality request")
-    private String municipality;
-
-    @NotNull(message = "costumerId request")
-    private Long customerId;
 }

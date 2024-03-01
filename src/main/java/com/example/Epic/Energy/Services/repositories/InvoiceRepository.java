@@ -43,6 +43,6 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long>, PagingA
 
     //Range di importi
     // Recupera le fatture con un importo compreso tra due valori specificati
-    @Query("SELECT i FROM Invoice i WHERE i.importo BETWEEN :minAmount AND :maxAmount")
+    @Query("SELECT i FROM Invoice i WHERE i.amount BETWEEN :minAmount AND :maxAmount")
     Page<Invoice> findByImportoBetween(double minAmount, double maxAmount, Pageable pageable);
 }

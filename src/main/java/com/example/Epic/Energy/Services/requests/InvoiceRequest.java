@@ -14,6 +14,9 @@ public class InvoiceRequest {
     @NotNull(message = "status request")
     private InvoiceStatus status;
 
+    @NotNull(message = "amount request")
+    private double amount;
+
     @NotNull(message = "customer request")
     private Long customerId;
 }

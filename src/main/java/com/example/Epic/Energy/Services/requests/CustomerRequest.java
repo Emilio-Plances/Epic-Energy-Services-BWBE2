@@ -1,6 +1,8 @@
 package com.example.Epic.Energy.Services.requests;
 
+import com.example.Epic.Energy.Services.entities.Address;
 import com.example.Epic.Energy.Services.enums.CustomerType;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -21,11 +23,15 @@ public class CustomerRequest {
     @NotBlank(message = "Phone number request")
     private String phoneNumber;
 
-    @NotBlank(message = "Registered office address request")
-    private String registeredOfficeAddress;
+    private Long registeredOfficeAddressId;
 
-    @NotBlank(message = "Operational headquarters address request")
-    private String operationalHeadquartersAddress;
+    @Valid
+    private AddressRequest registeredOfficeAddress;
+
+    private Long operationalHeadquartersAddressId;
+
+    @Valid
+    private AddressRequest operationalHeadquartersAddress;
 
     @NotBlank(message = "Contact name request")
     private String contactName;

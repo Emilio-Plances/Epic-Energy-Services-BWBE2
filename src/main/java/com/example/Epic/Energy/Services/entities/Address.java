@@ -8,7 +8,7 @@ import lombok.Data;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String street;
     @Column(name = "street_number")
     private String streetNumber;
@@ -16,9 +16,12 @@ public class Address {
     @Column(name = "postal_code")
     private String postalCode;
     private String country;
-    @OneToOne
+    private String province;
+
+    @ManyToOne
     @JoinColumn(name = "municipality_fk")
     private Municipality municipality;
-    @OneToOne(mappedBy = "address")
-    private Customer customer;
+
+
+
 }

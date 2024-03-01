@@ -14,6 +14,7 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long number;
     private LocalDate date;
+    private double amount;
     @Enumerated(EnumType.STRING)
     private InvoiceStatus status;
     @ManyToOne

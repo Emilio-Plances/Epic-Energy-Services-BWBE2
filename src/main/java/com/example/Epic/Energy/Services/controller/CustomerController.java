@@ -42,7 +42,7 @@ public class CustomerController {
     }
 
     @PostMapping("")
-    public ResponseEntity<DefaultResponse> saveCustomer(@RequestBody @Validated CustomerRequest customerRequest, BindingResult bindingResult) throws BadRequestExceptionHandler {
+    public ResponseEntity<DefaultResponse> saveCustomer(@RequestBody @Validated CustomerRequest customerRequest, BindingResult bindingResult) throws BadRequestExceptionHandler, NotFoundException {
         if (bindingResult.hasErrors()) throw new BadRequestExceptionHandler(bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList().toString());
         return DefaultResponse.noMessage(customerService.saveCustomer(customerRequest), HttpStatus.OK);
     }

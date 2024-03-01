@@ -29,9 +29,10 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     Page<Customer> findAllOrderByDataUltimoContattoDesc(Pageable pageable);
 
     //Provincia della sede legale
-    // Recupera tutti i clienti ordinati per provincia della sede legale in ordine ascendente
-    @Query("SELECT c FROM Customer c ORDER BY c.address.province ASC")
+//    Recupera tutti i clienti ordinati per provincia della sede legale in ordine ascendente
+    @Query("SELECT c FROM Customer c ORDER BY c.registeredOfficeAddress.province ASC")
     Page<Customer> findAllOrderByProvinciaSedeLegaleAsc(Pageable pageable);
+
 
     //Fatturato annuale
     //Nel dubbio ho messo il fatturoAnnuale come un lavore intermezzo a dei valori. Si può creare anche mettendo direttamente un prezzo

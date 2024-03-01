@@ -1,6 +1,7 @@
 package com.example.Epic.Energy.Services.entities;
 
 import com.example.Epic.Energy.Services.enums.CustomerType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -31,10 +32,6 @@ public class Customer {
     private String pec;
     @Column(name = "phone_number", unique = true)
     private String phoneNumber;
-    @Column(name = "registered_office_address")
-    private String registeredOfficeAddress;
-    @Column(name = "operational_headquarters_address")
-    private String operationalHeadquartersAddress;
     @Column(name = "contact_name")
     private String contactName;
     @Column(name = "contact_surname")
@@ -47,9 +44,17 @@ public class Customer {
     private CustomerType customerType;
     @Column(unique = true)
     private String email;
+
     @OneToOne
-    @JoinColumn(name = "address_fk")
-    private Address address;
-    @OneToMany(mappedBy = "customer")
+    @JoinColumn(name = "registered_office_address_id")
+    private Address  registeredOfficeAddress;
+
+    @OneToOne
+    @JoinColumn(name = "operational_headquarters_address_id")
+    private Address  operationalHeadquartersAddress;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
     private List<Invoice> invoices;
+
 }

@@ -32,6 +32,7 @@ public class InvoiceService {
         invoice.setCustomer(customerService.getCustomerById(invoiceRequest.getCustomerId()));
         invoice.setDate(invoiceRequest.getDate());
         invoice.setStatus(invoiceRequest.getStatus());
+        invoice.setAmount(invoiceRequest.getAmount());
 
         return invoiceRepository.save(invoice);
     }
@@ -41,6 +42,7 @@ public class InvoiceService {
         invoice.setCustomer(customerService.getCustomerById(invoiceRequest.getCustomerId()));
         invoice.setDate(invoiceRequest.getDate());
         invoice.setStatus(invoiceRequest.getStatus());
+        invoice.setAmount(invoiceRequest.getAmount());
 
         return invoiceRepository.save(invoice);
     }
