@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -34,7 +35,7 @@ public class User implements UserDetails {
     @URL
     private String avatar;
     @Enumerated(EnumType.STRING)
-    private List<Role> roles;
+    private Set<Role> roles;
     @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -65,5 +66,7 @@ public class User implements UserDetails {
         return true;
     }
 
-
+    public void addRole(Role role) {
+        roles.add(role);
+    }
 }

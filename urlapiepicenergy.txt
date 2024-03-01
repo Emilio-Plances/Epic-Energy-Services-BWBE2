@@ -13,3 +13,5 @@ http://localhost:8080/api/customers/byAnnualTurnoverRange?minRevenue=10000&maxRe
 http://localhost:8080/api/customers/byInsertionDateRange?fromDate=2024-02-27&toDate=2024-02-28
 http://localhost:8080/api/customers/byLastContactDateRange?fromDate=2024-02-27&toDate=2024-02-28
 http://localhost:8080/api/customers/byNameContaining?name=stu
+
+http://localhost:8080/api/users/2/promoteToAdmin

@@ -27,11 +27,11 @@ public class ErrorHandler {
         return new ErrorResponse(e.getMessage());
     }
 
- //   @ExceptionHandler(PSQLException.class)
- //   @ResponseStatus(HttpStatus.BAD_REQUEST)
- //   public ErrorResponse badRequestExceptionHandler(PSQLException e){
- //       return new ErrorResponse(e.getMessage());
- //   }
+    @ExceptionHandler(AlreadyAdminException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ErrorResponse alreadyAdminException(AlreadyAdminException e){
+        return new ErrorResponse(e.getMessage());
+    }
 
 
 }

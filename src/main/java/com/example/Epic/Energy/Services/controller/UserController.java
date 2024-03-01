@@ -2,6 +2,7 @@ package com.example.Epic.Energy.Services.controller;
 
 import com.cloudinary.Cloudinary;
 import com.example.Epic.Energy.Services.entities.User;
+import com.example.Epic.Energy.Services.exceptions.AlreadyAdminException;
 import com.example.Epic.Energy.Services.exceptions.BadRequestExceptionHandler;
 import com.example.Epic.Energy.Services.exceptions.NotFoundException;
 import com.example.Epic.Energy.Services.requests.RegisterRequest;
@@ -58,5 +59,11 @@ public class UserController {
     public ResponseEntity<DefaultResponse> uploadAvatar(@PathVariable long id, @RequestParam("upload") MultipartFile file) throws IOException, NotFoundException {
         User x = userService.uploadAvatar(id, (String)cloudinary.uploader().upload(file.getBytes(), new HashMap()).get("url"));
         return DefaultResponse.full("Avatar was uploaded successfully", x , HttpStatus.OK);
+    }
+
+    @PutMapping("/{userId}/promoteToAdmin")
+    public ResponseEntity<DefaultResponse> promoteUserToAdmin(@PathVariable Long userId) throws NotFoundException, AlreadyAdminException {
+            userService.updateUserToAdmin(userId);
+            return DefaultResponse.noObject("User successfully promoted to admin role.", HttpStatus.OK);
     }
 }

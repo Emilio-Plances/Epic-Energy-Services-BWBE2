@@ -2,6 +2,7 @@ package com.example.Epic.Energy.Services.services;
 
 import com.example.Epic.Energy.Services.entities.User;
 import com.example.Epic.Energy.Services.enums.Role;
+import com.example.Epic.Energy.Services.exceptions.AlreadyAdminException;
 import com.example.Epic.Energy.Services.exceptions.NotFoundException;
 import com.example.Epic.Energy.Services.repositories.UserRepository;
 import com.example.Epic.Energy.Services.requests.RegisterRequest;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService {
@@ -42,7 +44,7 @@ public class UserService {
         x.setPassword(encoder.encode(registerRequest.getPassword()));
         x.setFirstName(registerRequest.getFirstName());
         x.setLastName(registerRequest.getLastName());
-        x.setRoles(List.of(Role.USER));
+        x.setRoles(Set.of(Role.USER));
         return userRepository.save(x);
     }
 
@@ -65,5 +67,12 @@ public class UserService {
         User x = getUserById(id);
         x.setAvatar(url);
         return userRepository.save(x);
+    }
+
+    public void updateUserToAdmin(Long userId) throws NotFoundException, AlreadyAdminException {
+        User user = getUserById(userId);
+        if(user.getRoles().contains(Role.ADMIN)) throw new AlreadyAdminException("Already admin");
+        user.addRole(Role.ADMIN);
+        userRepository.save(user);
     }
 }
