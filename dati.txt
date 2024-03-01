@@ -1,0 +1,166 @@
+CUSTOMER
+{
+  "businessName": "Studio Legale Bianchi & Rossi",
+  "vatNumber": "11223344556",
+  "pec": "info@studiorossibianchi.it",
+  "phoneNumber": "+39 051 1122334",
+  "registeredOfficeAddress": {
+    "street": "Via Garibaldi",
+    "streetNumber": "30",
+    "city": "Bologna",
+    "postalCode": "40100",
+    "country": "Italia",
+    "province": "Bologna"
+  },
+  "operationalHeadquartersAddress": {
+    "street": "Piazza del Popolo",
+    "streetNumber": "25",
+    "city": "Roma",
+    "postalCode": "00187",
+    "country": "Italia",
+    "province": "Roma"
+  },
+  "contactName": "Paolo",
+  "contactSurname": "Verdi",
+  "contactNumber": "+39 333 1122334",
+  "customerType": "SRL",
+  "email": "paolo.verdi@studiorossibianchi.it"
+}
+{
+  "businessName": "Pizzeria da Mario",
+  "vatNumber": "12345678901",
+  "pec": "info@pizzeriadamario.it",
+  "phoneNumber": "+39 02 1234567",
+  "registeredOfficeAddress": {
+    "street": "Via Napoli",
+    "streetNumber": "10",
+    "city": "Milano",
+    "postalCode": "20100",
+    "country": "Italia",
+    "province": "Milano"
+  },
+  "operationalHeadquartersAddress": {
+    "street": "Via Roma",
+    "streetNumber": "5",
+    "city": "Firenze",
+    "postalCode": "50100",
+    "country": "Italia",
+    "province": "Firenze"
+  },
+  "contactName": "Luigi",
+  "contactSurname": "Bianchi",
+  "contactNumber": "+39 333 7654321",
+  "customerType": "SRL",
+  "email": "luigi@pizzeriadamario.it"
+}
+{
+  "businessName": "Supermarket S.p.A.",
+  "vatNumber": "98765432101",
+  "pec": "info@supermarket.it",
+  "phoneNumber": "+39 06 9876543",
+  "registeredOfficeAddress": {
+    "street": "Via Venezia",
+    "streetNumber": "20",
+    "city": "Roma",
+    "postalCode": "00100",
+    "country": "Italia",
+    "province": "Roma"
+  },
+  "operationalHeadquartersAddress": {
+    "street": "Corso Umberto I",
+    "streetNumber": "15",
+    "city": "Napoli",
+    "postalCode": "80100",
+    "country": "Italia",
+    "province": "Napoli"
+  },
+  "contactName": "Giovanna",
+  "contactSurname": "Verdi",
+  "contactNumber": "+39 333 9876543",
+  "customerType": "SRL",
+  "email": "giovanna@supermarket.it"
+}
+{
+  "businessName": "Studio Legale Bianchi & Rossi",
+  "vatNumber": "11223344556",
+  "pec": "info@studiorossibianchi.it",
+  "phoneNumber": "+39 051 1122334",
+  "registeredOfficeAddress": {
+    "street": "Via Garibaldi",
+    "streetNumber": "30",
+    "city": "Bologna",
+    "postalCode": "40100",
+    "country": "Italia",
+    "province": "Bologna"
+  },
+  "operationalHeadquartersAddress": {
+    "street": "Piazza del Popolo",
+    "streetNumber": "25",
+    "city": "Roma",
+    "postalCode": "00187",
+    "country": "Italia",
+    "province": "Roma"
+  },
+  "contactName": "Paolo",
+  "contactSurname": "Verdi",
+  "contactNumber": "+39 333 1122334",
+  "customerType": "SRL",
+  "email": "paolo.verdi@studiorossibianchi.it"
+}
+
+
+
+USERS
+{
+    "username":"Matteo",
+    "email":"matteorossi@virgilio.it",
+    "password":"Matteo1@",
+    "firstName":"Matteo",
+    "lastName":"Rossi"
+}
+
+
+
+lOGIN
+{
+    "username":"Calogero",
+    "password":"Calogero1@"
+}
+
+
+
+
+INVOICE
+{
+  "customerId": 3,
+  "date": "2024-02-26",
+  "status": "PAYING",
+  "amount": 150.00
+}
+{
+  "customerId": 1,
+  "date": "2024-02-28",
+  "status": "PAYED",
+  "amount": 100.50
+}
+{
+  "customerId": 1,
+  "date": "2024-02-27",
+  "status": "PAYING",
+  "amount": 200.75
+}
+{
+  "customerId": 3,
+  "date": "2024-02-26",
+  "status": "PAYED",
+  "amount": 1000.00
+}
+
+
+
+SENDEMAIL
+{
+    "destinatario": "example@gmail.com",
+    "oggetto": "Oggetto dell'email",
+    "messaggio": "Testo del messaggio da inviare"
+}
