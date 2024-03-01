@@ -141,4 +141,6 @@ public class CustomerService {
     public Page<Customer> customersByRagioneSociale(String name, Pageable pageable) {
         return customerRepository.findByRagioneSocialeContaining(name, pageable);
     }
+
+
 }

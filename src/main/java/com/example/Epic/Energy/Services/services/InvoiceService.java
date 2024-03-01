@@ -53,9 +53,10 @@ public class InvoiceService {
     }
 
 
-    public Page<Invoice> getByCustomer(Customer customer, Pageable pageable) {
-        return invoiceRepository.findByCustomer(customer, pageable);
+    public Page<Invoice> getByCustomer(long customerId, Pageable pageable) {
+        return invoiceRepository.findByCustomer(customerId, pageable);
     }
+
 
     public Page<Invoice> getByStatus(String status, Pageable pageable) {
         return invoiceRepository.findByStatus(status, pageable);

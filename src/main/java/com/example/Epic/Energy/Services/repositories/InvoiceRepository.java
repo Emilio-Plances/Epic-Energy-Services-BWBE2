@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.Optional;
@@ -19,8 +20,9 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long>, PagingA
 
     //Cliente
     // Recupera le fatture relative a un cliente specificato
-    @Query("SELECT i FROM Invoice i WHERE i.customer = :customer")
-    Page<Invoice> findByCustomer(Customer customer, Pageable pageable);
+    @Query("SELECT i FROM Invoice i WHERE i.customer.id = :customerId")
+    Page<Invoice> findByCustomer(@Param("customerId") long customerId, Pageable pageable);
+
 
     //Stato
     // Recupera le fatture con uno stato specifico

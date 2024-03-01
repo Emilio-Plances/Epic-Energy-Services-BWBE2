@@ -9,6 +9,7 @@ import com.example.Epic.Energy.Services.responses.DefaultResponse;
 import com.example.Epic.Energy.Services.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.HashMap;
 
 @RestController
@@ -64,6 +66,52 @@ public class CustomerController {
         Customer x = customerService.udloadLogo(id, (String)cloudinary.uploader().upload(file.getBytes(), new HashMap()).get("url"));
         return DefaultResponse.full("Logo was uploaded successfully", x , HttpStatus.OK);
     }
+
+    @GetMapping("/orderByNameAsc")
+    public ResponseEntity<DefaultResponse> getCustomersOrderedByNameAsc(Pageable pageable) {
+        return DefaultResponse.noMessage(customerService.customersOrderByRagioneSociale(pageable), HttpStatus.OK);
+    }
+
+    @GetMapping("/orderByAnnualTurnoverDesc")
+    public ResponseEntity<DefaultResponse> getCustomersOrderedByAnnualTurnoverDesc(Pageable pageable) {
+        return DefaultResponse.noMessage(customerService.customersOrderByFattAnnuale(pageable), HttpStatus.OK);
+    }
+
+    @GetMapping("/orderByInsertionDateDesc")
+    public ResponseEntity<DefaultResponse> getCustomersOrderedByInsertionDateDesc(Pageable pageable) {
+        return DefaultResponse.noMessage(customerService.customersOrderByDataInserimento(pageable), HttpStatus.OK);
+    }
+
+    @GetMapping("/orderByLastContactDateDesc")
+    public ResponseEntity<DefaultResponse> getCustomersOrderedByLastContactDateDesc(Pageable pageable) {
+        return DefaultResponse.noMessage(customerService.customersOrderByDataUltimoContatto(pageable), HttpStatus.OK);
+    }
+
+    @GetMapping("/orderByRegisteredOfficeProvinceAsc")
+    public ResponseEntity<DefaultResponse> getCustomersOrderedByRegisteredOfficeProvinceAsc(Pageable pageable) {
+        return DefaultResponse.noMessage(customerService.customersOrderByProvincia(pageable), HttpStatus.OK);
+    }
+
+    @GetMapping("/byAnnualTurnoverRange")
+    public ResponseEntity<DefaultResponse> getCustomersByAnnualTurnoverRange(@RequestParam double minRevenue, @RequestParam double maxRevenue, Pageable pageable) {
+        return DefaultResponse.noMessage(customerService.customersByIntervalloFatturatoAnnuale(minRevenue, maxRevenue, pageable), HttpStatus.OK);
+    }
+
+    @GetMapping("/byInsertionDateRange")
+    public ResponseEntity<DefaultResponse> getCustomersByInsertionDateRange(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fromDate, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate toDate, Pageable pageable) {
+        return DefaultResponse.noMessage(customerService.customersByIntervalloDataInserimento(fromDate, toDate, pageable), HttpStatus.OK);
+    }
+
+    @GetMapping("/byLastContactDateRange")
+    public ResponseEntity<DefaultResponse> getCustomersByLastContactDateRange(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fromDate, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate toDate, Pageable pageable) {
+        return DefaultResponse.noMessage(customerService.customersByIntervalloDataUltimoContatto(fromDate, toDate, pageable), HttpStatus.OK);
+    }
+
+    @GetMapping("/byNameContaining")
+    public ResponseEntity<DefaultResponse> getCustomersByNameContaining(@RequestParam String name, Pageable pageable) {
+        return DefaultResponse.noMessage(customerService.customersByRagioneSociale(name, pageable), HttpStatus.OK);
+    }
+
 
 
 

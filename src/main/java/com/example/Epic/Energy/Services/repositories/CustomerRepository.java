@@ -13,6 +13,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     @Query("SELECT c FROM Customer c ORDER BY c.businessName ASC")
     Page<Customer> findBusinessNameASC(Pageable pageable);
 
+
     //FatturatoAnnuale
     // Recupera tutti i clienti ordinati per fatturato annuale in ordine discendente
     @Query("SELECT c FROM Customer c ORDER BY c.annualTurnover DESC")
