@@ -1,0 +1,15 @@
+http://localhost:8080/api/invoices/byCustomer?customerId=2
+http://localhost:8080/api/invoices/byDate?date=2024-02-28
+http://localhost:8080/api/invoices/byYear?year=2024
+http://localhost:8080/api/invoices/byDateBetween?startDate=2024-02-27&endDate=2024-02-28
+http://localhost:8080/api/invoices/byImportoBetween?minAmount=100&maxAmount=500
+
+http://localhost:8080/api/customers/orderByNameAsc
+http://localhost:8080/api/customers/orderByAnnualTurnoverDesc
+http://localhost:8080/api/customers/orderByInsertionDateDesc
+http://localhost:8080/api/customers/orderByLastContactDateDesc
+http://localhost:8080/api/customers/orderByRegisteredOfficeProvinceAsc
+http://localhost:8080/api/customers/byAnnualTurnoverRange?minRevenue=10000&maxRevenue=20000
+http://localhost:8080/api/customers/byInsertionDateRange?fromDate=2024-02-27&toDate=2024-02-28
+http://localhost:8080/api/customers/byLastContactDateRange?fromDate=2024-02-27&toDate=2024-02-28
+http://localhost:8080/api/customers/byNameContaining?name=stu
